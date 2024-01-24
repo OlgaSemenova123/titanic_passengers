@@ -5,8 +5,11 @@ X = titanic_data.drop(['PassengerId', 'Survived', 'Name', 'Ticket', 'Cabin'], ax
 
 Пустые значения были заполнены средней по полу:
 age_female_median = X[X.Sex_female == True].Age.median()
+
 age_male_median = X[X.Sex_male == True].Age.median()
+
 X[X.Sex_female == True] = X[X.Sex_female == True].fillna({'Age': age_female_median})
+
 X[X.Sex_male == True] = X[X.Sex_male == True].fillna({'Age': age_male_median})
 
 При расчете были выбраны следующие оптимальные параметры:
