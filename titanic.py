@@ -10,7 +10,7 @@ pd.set_option('display.max_columns', 500)
 np.random.seed(0)
 
 # выбираем переменные
-titanic_data = pd.read_csv('/home/andrey4281/Загрузки/train.csv')
+titanic_data = pd.read_csv('/Загрузки/train.csv')
 X = titanic_data.drop(['PassengerId', 'Survived', 'Name', 'Ticket', 'Cabin'], axis=1)
 y = titanic_data['Survived']
 
@@ -53,7 +53,7 @@ print('recall_score_second:', recall_score(y_test, y_pred))
 # tree.plot_tree(best_clf)
 
 # Загрузим тестовые данные для отправки на kaggle
-titanic_data = pd.read_csv('/home/andrey4281/Загрузки/test.csv')
+titanic_data = pd.read_csv('/Загрузки/test.csv')
 X_testing = titanic_data.drop(['PassengerId', 'Name', 'Ticket', 'Cabin'], axis=1)
 X_testing = pd.get_dummies(X_testing)
 X_testing[X_testing.Sex_female == True] = X_testing[X_testing.Sex_female == True].fillna({'Age': age_female_median})
@@ -65,7 +65,7 @@ result = pd.Series(np.where(result_predicted_prob[:, 1] > 0.7, 1, 0))
 final = pd.DataFrame()
 final = pd.concat([titanic_data['PassengerId'], result], axis=1)
 final.columns = ['PassengerId', 'Survived']
-final.to_csv(r'/home/andrey4281/Загрузки/prediction.csv', index=False)
+final.to_csv(r'/Загрузки/prediction.csv', index=False)
 
 # Дополнительно построим ROC-кривую для отбора вероятности выбора класса
 fpr, tpr, thresholds = roc_curve(y_test, y_predicted_prob[:,1])
